@@ -1,0 +1,47 @@
+<p><a href="https://badge.fury.io/py/FLAML"><img src="https://badge.fury.io/py/FLAML.svg" alt="PyPI version" /></a> <img src="https://img.shields.io/conda/vn/conda-forge/flaml" alt="Conda version" /> <a href="https://github.com/microsoft/FLAML/actions/workflows/python-package.yml"><img src="https://github.com/microsoft/FLAML/actions/workflows/python-package.yml/badge.svg" alt="Build" /></a> <img src="https://img.shields.io/badge/3.6%20%7C%203.7%20%7C%203.8%20%7C%203.9-blue" alt="Python Version" /> <a href="https://pepy.tech/project/flaml"><img src="https://pepy.tech/badge/flaml" alt="Downloads" /></a> <a href="https://gitter.im/FLAMLer/community?utm_source=badge&amp;utm_medium=badge&amp;utm_campaign=pr-badge&amp;utm_content=badge"><img src="https://badges.gitter.im/FLAMLer/community.svg" alt="Join the chat at https://gitter.im/FLAMLer/community" /></a></p>
+<h1 id="a-fast-library-for-automated-machine-learning-tuning">A Fast Library for Automated Machine Learning &amp; Tuning</h1>
+<p align="center">
+<img src="https://github.com/microsoft/FLAML/blob/main/website/static/img/flaml.svg"  width=200> <br>
+</p>
+<p>FLAML is a lightweight Python library that finds accurate machine learning models automatically, efficiently and economically. It frees users from selecting learners and hyperparameters for each learner.</p>
+<ol type="1">
+<li>For common machine learning tasks like classification and regression, it quickly finds quality models for user-provided data with low computational resources. It supports both classifcal machine learning models and deep neural networks.</li>
+<li>It is easy to customize or extend. Users can choose their desired customizability: minimal customization (computational resource budget), medium customization (e.g., scikit-style learner, search space and metric), or full customization (arbitrary training and evaluation code).</li>
+<li>It supports fast automatic tuning, capable of handling complex constraints/guidance/early stopping. FLAML is powered by a new, <a href="https://microsoft.github.io/FLAML/Use-Cases/Tune-User-Defined-Function#hyperparameter-optimization-algorithm">cost-effective hyperparameter optimization</a> and learner selection method invented by Microsoft Research.</li>
+</ol>
+<p>FLAML has a .NET implementation as well from <a href="https://dotnet.microsoft.com/apps/machinelearning-ai/ml-dotnet/model-builder">ML.NET Model Builder</a> in <a href="https://visualstudio.microsoft.com/">Visual Studio</a> 2022. This <a href="https://devblogs.microsoft.com/dotnet/ml-net-june-updates/#new-and-improved-automl">ML.NET blog</a> describes the improvement brought by FLAML.</p>
+<h2 id="installation">Installation</h2>
+<p>FLAML requires <strong>Python version &gt;= 3.6</strong>. It can be installed from pip:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="ex">pip</span> install flaml</span></code></pre></div>
+<p>To run the <a href="https://github.com/microsoft/FLAML/tree/main/notebook"><code>notebook example</code></a>, install flaml with the [notebook] option:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="ex">pip</span> install flaml[notebook]</span></code></pre></div>
+<h2 id="quickstart">Quickstart</h2>
+<ul>
+<li>With three lines of code, you can start using this economical and fast AutoML engine as a scikit-learn style estimator.</li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="im">from</span> flaml <span class="im">import</span> AutoML</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>automl <span class="op">=</span> AutoML()</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a>automl.fit(X_train, y_train, task<span class="op">=</span><span class="st">&quot;classification&quot;</span>)</span></code></pre></div>
+<ul>
+<li>You can restrict the learners and use FLAML as a fast hyperparameter tuning tool for XGBoost, LightGBM, Random Forest etc. or a customized learner.</li>
+</ul>
+<div class="sourceCode" id="cb4"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a>automl.fit(X_train, y_train, task<span class="op">=</span><span class="st">&quot;classification&quot;</span>, estimator_list<span class="op">=</span>[<span class="st">&quot;lgbm&quot;</span>])</span></code></pre></div>
+<ul>
+<li>You can also run generic hyperparameter tuning for a custom function.</li>
+</ul>
+<div class="sourceCode" id="cb5"><pre class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="im">from</span> flaml <span class="im">import</span> tune</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a>tune.run(evaluation_function, config<span class="op">=</span>{…}, low_cost_partial_config<span class="op">=</span>{…}, time_budget_s<span class="op">=</span><span class="dv">3600</span>)</span></code></pre></div>
+<h2 id="documentation">Documentation</h2>
+<p>You can find a detailed documentation about FLAML <a href="https://microsoft.github.io/FLAML/">here</a> where you can find the API documentation, use cases and examples.</p>
+<p>In addition, you can find:</p>
+<ul>
+<li><p>Demo and tutorials of FLAML <a href="https://www.youtube.com/channel/UCfU0zfFXHXdAd5x-WvFBk5A">here</a>.</p></li>
+<li><p>Research around FLAML <a href="https://microsoft.github.io/FLAML/docs/Research">here</a>.</p></li>
+<li><p>FAQ <a href="https://microsoft.github.io/FLAML/docs/FAQ">here</a>.</p></li>
+<li><p>Contributing guide <a href="https://microsoft.github.io/FLAML/docs/Contribute">here</a>.</p></li>
+</ul>
+<h2 id="contributing">Contributing</h2>
+<p>This project welcomes contributions and suggestions. Most contributions require you to agree to a Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us the rights to use your contribution. For details, visit <a href="https://cla.opensource.microsoft.com" class="uri">https://cla.opensource.microsoft.com</a>.</p>
+<p>If you are new to GitHub <a href="https://help.github.com/categories/collaborating-with-issues-and-pull-requests/">here</a> is a detailed help source on getting involved with development on GitHub.</p>
+<p>When you submit a pull request, a CLA bot will automatically determine whether you need to provide a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions provided by the bot. You will only need to do this once across all repos using our CLA.</p>
+<p>This project has adopted the <a href="https://opensource.microsoft.com/codeofconduct/">Microsoft Open Source Code of Conduct</a>. For more information see the <a href="https://opensource.microsoft.com/codeofconduct/faq/">Code of Conduct FAQ</a> or contact <a href="mailto:opencode@microsoft.com">opencode@microsoft.com</a> with any additional questions or comments.</p>
